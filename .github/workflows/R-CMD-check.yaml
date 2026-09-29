@@ -1,0 +1,53 @@
+# Restores the renv library, runs devtools::test(), then R CMD check.
+name: R-CMD-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions: read-all
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+      # Use Posit Package Manager binaries for a fast renv restore.
+      RENV_CONFIG_PPM_ENABLED: "TRUE"
+      NOT_CRAN: "true"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.4"
+          use-public-rspm: true
+
+      - name: System libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev \
+            libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev \
+            libtiff5-dev libjpeg-dev pandoc
+
+      # The quarto R package needs the Quarto CLI to render the report.
+      # If this step is removed, the report tests skip themselves.
+      - uses: quarto-dev/quarto-actions/setup@v2
+
+      # shinytest2 drives headless Chrome through chromote.
+      - uses: browser-actions/setup-chrome@v1
+
+      - uses: r-lib/actions/setup-renv@v2
+
+      - name: Unit and shinytest2 tests
+        run: Rscript -e 'devtools::test(stop_on_failure = TRUE)'
+
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          error-on: '"error"'
+          args: 'c("--no-manual", "--as-cran")'

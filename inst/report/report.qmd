@@ -1,0 +1,80 @@
+---
+title: "adam-review report"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    theme: cosmo
+execute:
+  echo: false
+  warning: false
+params:
+  data_file: ""
+---
+
+```{r}
+#| label: setup
+report <- readRDS(params$data_file)
+explorer <- report$explorer
+compare <- report$compare
+
+show_table <- function(x, ...) {
+  knitr::kable(x, row.names = FALSE, ...)
+}
+```
+
+Generated on `r report$generated`.
+
+## Explorer summary
+
+```{r}
+#| label: explorer
+#| results: asis
+if (is.null(explorer)) {
+  cat("No dataset was loaded in the Explorer.\n")
+} else {
+  cat(sprintf(
+    "Dataset **%s**: %s rows and %s variables.\n",
+    explorer$name,
+    format(explorer$n_rows, big.mark = ","),
+    format(explorer$n_cols, big.mark = ",")
+  ))
+}
+```
+
+```{r}
+#| label: explorer-table
+if (!is.null(explorer)) {
+  summary <- explorer$summary
+  numeric_cols <- c("min", "median", "mean", "max")
+  summary[numeric_cols] <- lapply(summary[numeric_cols], round, digits = 2)
+  show_table(summary)
+}
+```
+
+## Compare results
+
+```{r}
+#| label: compare
+#| results: asis
+if (is.null(compare)) {
+  cat("No comparison was run.\n")
+} else if (isTRUE(compare$identical)) {
+  cat(sprintf(
+    "**%s** and **%s** are identical: no differences were found.\n",
+    compare$base_name, compare$compare_name
+  ))
+} else {
+  cat(sprintf(
+    "Comparing **%s** (base) with **%s**: %d issue(s) found.\n",
+    compare$base_name, compare$compare_name, nrow(compare$table)
+  ))
+}
+```
+
+```{r}
+#| label: compare-table
+if (!is.null(compare) && !isTRUE(compare$identical)) {
+  show_table(compare$table)
+}
+```

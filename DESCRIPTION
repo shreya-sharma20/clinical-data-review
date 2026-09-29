@@ -1,0 +1,38 @@
+Package: adamreview
+Title: adam-review: Review CDISC ADaM Datasets in a Shiny App
+Version: 0.0.0.9000
+Authors@R: 
+    person("Shreya", "Sharma", , "sshreya319@gmail.com", role = c("aut", "cre"))
+Description: A small golem-based Shiny application for exploring CDISC ADaM
+    clinical trial datasets, comparing two datasets with 'diffdf', and
+    downloading a parameterized Quarto HTML report. Built as a portfolio
+    project to demonstrate clean, tested Shiny engineering.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 4.4.0)
+Imports: 
+    config,
+    diffdf,
+    dplyr,
+    DT,
+    golem,
+    haven,
+    pkgload,
+    quarto,
+    shiny
+Suggests: 
+    chromote,
+    devtools,
+    knitr,
+    pharmaverseadam,
+    rcmdcheck,
+    rmarkdown,
+    shinytest2,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Config/testthat/parallel: false
+URL: https://github.com/shreya-sharma20/clinical-data-review
+Config/roxygen2/version: 8.1.0
