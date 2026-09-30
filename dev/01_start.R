@@ -10,8 +10,8 @@
 ## Add meta data about your application and set some default {golem} options
 golem::fill_desc(
   pkg_name = "adamreview",
-  pkg_title = "adam-review: Review CDISC ADaM Datasets in a Shiny App",
-  pkg_description = "A small golem-based Shiny application for exploring CDISC ADaM datasets, comparing them with diffdf, and downloading a Quarto report.",
+  pkg_title = "ADaM Dataset Explorer: Review CDISC ADaM Datasets in a Shiny App",
+  pkg_description = "A small golem-based Shiny application for exploring CDISC ADaM datasets, comparing them with diffdf.",
   authors = person("Shreya", "Sharma", email = "sshreya319@gmail.com", role = c("aut", "cre")),
   repo_url = "https://github.com/shreya-sharma20/clinical-data-review",
   pkg_version = "0.0.0.9000",

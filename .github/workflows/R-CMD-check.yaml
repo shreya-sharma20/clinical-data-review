@@ -34,10 +34,6 @@ jobs:
             libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev \
             libtiff5-dev libjpeg-dev pandoc
 
-      # The quarto R package needs the Quarto CLI to render the report.
-      # If this step is removed, the report tests skip themselves.
-      - uses: quarto-dev/quarto-actions/setup@v2
-
       # shinytest2 drives headless Chrome through chromote.
       - uses: browser-actions/setup-chrome@v1
 

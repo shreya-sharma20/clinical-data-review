@@ -8,11 +8,10 @@ app_ui <- function(request) {
   tagList(
     golem_add_external_resources(),
     fluidPage(
-      titlePanel("adam-review"),
+      titlePanel("ADaM Dataset Explorer"),
       shiny::tabsetPanel(
         shiny::tabPanel("Explorer", mod_explorer_ui("explorer")),
-        shiny::tabPanel("Compare", mod_compare_ui("compare")),
-        shiny::tabPanel("Report", mod_report_ui("report"))
+        shiny::tabPanel("Compare", mod_compare_ui("compare"))
       )
     )
   )
@@ -34,7 +33,7 @@ golem_add_external_resources <- function() {
   tags$head(
     bundle_resources(
       path = app_sys("app/www"),
-      app_title = "adam-review"
+      app_title = "ADaM Dataset Explorer"
     )
   )
 }

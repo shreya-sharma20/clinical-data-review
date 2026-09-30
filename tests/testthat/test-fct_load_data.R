@@ -104,3 +104,25 @@ test_that("variable_type() classifies common column types", {
   expect_identical(variable_type(Sys.time()), "datetime")
   expect_identical(variable_type(list(1)), "other")
 })
+
+test_that("read_uploaded_data() reads ISO date columns of a CSV as dates", {
+  path <- withr::local_tempfile(fileext = ".csv")
+  writeLines(
+    c("ID,START,NOTE,BADDT,ALLEMPTY",
+      "a,2023-01-15,x,2023-02-30,",
+      "b,,y,2023-03-01,",
+      "c,2023-02-01,2023-01-01,2023-03-02,"),
+    path
+  )
+
+  res <- read_uploaded_data(path)
+
+  expect_s3_class(res$data$START, "Date")
+  expect_identical(res$data$START[1], as.Date("2023-01-15"))
+  expect_true(is.na(res$data$START[2])) # empty string becomes NA
+  expect_identical(res$meta$type[res$meta$variable == "START"], "date")
+  # a column that mixes dates and other text, or holds an invalid date, stays text
+  expect_type(res$data$NOTE, "character")
+  expect_type(res$data$BADDT, "character")
+  expect_false(inherits(res$data$ALLEMPTY, "Date"))
+})

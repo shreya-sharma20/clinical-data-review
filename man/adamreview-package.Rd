@@ -4,9 +4,9 @@
 \name{adamreview-package}
 \alias{adamreview}
 \alias{adamreview-package}
-\title{adamreview: adam-review: Review CDISC ADaM Datasets in a Shiny App}
+\title{adamreview: ADaM Dataset Explorer: Review CDISC ADaM Datasets in a Shiny App}
 \description{
-A small golem-based Shiny application for exploring CDISC ADaM clinical trial datasets, comparing two datasets with 'diffdf', and downloading a parameterized Quarto HTML report. Built as a portfolio project to demonstrate clean, tested Shiny engineering.
+The ADaM Dataset Explorer is a small golem-based Shiny application for exploring CDISC ADaM clinical trial datasets (data preview, summaries by variable type and interactive charts), comparing two datasets with 'diffdf'. Built as a portfolio project to demonstrate clean, tested Shiny engineering.
 }
 \seealso{
 Useful links:

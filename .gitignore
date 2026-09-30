@@ -10,7 +10,6 @@ renv/lock/
 renv/python/
 renv/sandbox/
 renv/staging/
-_quarto/
 *.html
 !inst/**/*.html
 rsconnect/

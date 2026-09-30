@@ -1,12 +1,13 @@
 Package: adamreview
-Title: adam-review: Review CDISC ADaM Datasets in a Shiny App
+Title: ADaM Dataset Explorer: Review CDISC ADaM Datasets in a Shiny App
 Version: 0.0.0.9000
 Authors@R: 
     person("Shreya", "Sharma", , "sshreya319@gmail.com", role = c("aut", "cre"))
-Description: A small golem-based Shiny application for exploring CDISC ADaM
-    clinical trial datasets, comparing two datasets with 'diffdf', and
-    downloading a parameterized Quarto HTML report. Built as a portfolio
-    project to demonstrate clean, tested Shiny engineering.
+Description: The ADaM Dataset Explorer is a small golem-based Shiny application
+    for exploring CDISC ADaM clinical trial datasets (data preview, summaries
+    by variable type and interactive charts), comparing two datasets with
+    'diffdf'. Built as a portfolio project to demonstrate clean, tested Shiny
+    engineering.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -20,15 +21,13 @@ Imports:
     golem,
     haven,
     pkgload,
-    quarto,
+    plotly,
     shiny
 Suggests: 
     chromote,
     devtools,
-    knitr,
     pharmaverseadam,
     rcmdcheck,
-    rmarkdown,
     shinytest2,
     testthat (>= 3.0.0),
     withr

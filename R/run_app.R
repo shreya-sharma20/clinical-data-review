@@ -1,4 +1,4 @@
-#' Run the adam-review Shiny application
+#' Run the ADaM Dataset Explorer Shiny application
 #'
 #' @param onStart A function that will be called before the app is actually run.
 #'   This is only needed for `shinyAppObj`, since in the case of `shinyAppDir`

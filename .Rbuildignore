@@ -12,7 +12,7 @@
 ^README_files$
 ^man/figures/.*\.png$
 ^rsconnect$
-^_quarto$
 ^app\.R$
 ^\.rscignore$
 ^manifest\.json$
+^data-raw$

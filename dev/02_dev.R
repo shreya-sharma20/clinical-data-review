@@ -17,7 +17,6 @@
 # golem::add_fct("load_data", with_test = TRUE)       # Phase 2
 # golem::add_fct("summarize_data", with_test = TRUE)  # Phase 2
 # golem::add_fct("compare_data", with_test = TRUE)    # Phase 3
-# golem::add_fct("render_report", with_test = TRUE)   # Phase 4
 
 ## Tests ----
 ## Add one line by test you want to create

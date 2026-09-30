@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_app.R
 \name{run_app}
 \alias{run_app}
-\title{Run the adam-review Shiny application}
+\title{Run the ADaM Dataset Explorer Shiny application}
 \usage{
 run_app(
   onStart = NULL,
@@ -34,5 +34,5 @@ request to determine whether the \code{ui} should be used to handle the request.
 for more details.}
 }
 \description{
-Run the adam-review Shiny application
+Run the ADaM Dataset Explorer Shiny application
 }

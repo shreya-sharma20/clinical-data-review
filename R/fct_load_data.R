@@ -58,8 +58,9 @@ read_uploaded_data <- function(path, filename = basename(path)) {
   reader <- switch(
     ext,
     xpt = function(p) haven::read_xpt(p),
-    csv = function(p) utils::read.csv(p, stringsAsFactors = FALSE,
-                                      check.names = FALSE),
+    csv = function(p) parse_iso_dates(
+      utils::read.csv(p, stringsAsFactors = FALSE, check.names = FALSE)
+    ),
     stop(
       "Unsupported file type '.", ext, "' for '", filename,
       "'. Please upload an .xpt or .csv file.",
@@ -78,6 +79,30 @@ read_uploaded_data <- function(path, filename = basename(path)) {
     }
   )
   new_dataset(data, tools::file_path_sans_ext(filename))
+}
+
+#' Convert ISO 8601 date columns of a CSV import to `Date`
+#'
+#' CSV files have no date type, so dates arrive as text. A character column is
+#' converted when every non-empty value is a valid `YYYY-MM-DD` date; empty
+#' strings become `NA`. Any other column is left untouched.
+#'
+#' @param data A data frame.
+#' @return `data`, with the qualifying columns converted to `Date`.
+#' @noRd
+parse_iso_dates <- function(data) {
+  data[] <- lapply(data, function(x) {
+    if (!is.character(x)) {
+      return(x)
+    }
+    present <- !is.na(x) & x != ""
+    if (!any(present) || !all(grepl("^\\d{4}-\\d{2}-\\d{2}$", x[present]))) {
+      return(x)
+    }
+    parsed <- as.Date(x, format = "%Y-%m-%d")
+    if (anyNA(parsed[present])) x else parsed
+  })
+  data
 }
 
 #' Build the per-variable label/type metadata table

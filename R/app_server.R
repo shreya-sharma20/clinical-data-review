@@ -6,7 +6,6 @@
 #'
 #' @noRd
 app_server <- function(input, output, session) {
-  dataset <- mod_explorer_server("explorer")
-  comparison <- mod_compare_server("compare")
-  mod_report_server("report", dataset, comparison)
+  mod_explorer_server("explorer")
+  mod_compare_server("compare")
 }
